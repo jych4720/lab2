@@ -1,0 +1,17 @@
+<html>
+ <head>
+ </head>
+ <body>
+    <b>Hello World</b>
+    <p>Hello World</p>
+    Hello World
+    <img src="https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg" alt="A bird image from Pixabay">
+    <form action="/submit" method="post">
+       <label for="namefield">Name:</label>
+       <input type="text" id="namefield" name="name">
+       <label for="agefield">Age:</label>
+       <input type="number" id="agefield" name="age">
+       <input type="submit" value="Submit">
+    </form>
+ </body>
+</html>
