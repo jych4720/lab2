@@ -16,3 +16,10 @@ def submit():
     input_year = request.form.get('bornyear')
     return render_template("hello.html", name=input_name,
                            age=input_age, bornyear=input_year)
+
+
+def process_query(query):
+    if query == "dinosaurs":
+        return "Dinosaurs ruled the Earth 200 million years ago"
+    elif query == "asteroids":
+        return "Unknown"
