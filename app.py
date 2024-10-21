@@ -23,3 +23,13 @@ def process_query(query):
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif query == "asteroids":
         return "Unknown"
+
+
+@app.route("/query", methods=["GET"])
+def query():
+    query_param = request.args.get('q')
+    if query_param:
+        result = process_query(query_param)
+    else:
+        result = "Query parameter 'q' is missing."
+    return result
