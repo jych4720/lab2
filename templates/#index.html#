@@ -16,10 +16,5 @@
        <input type="number" id="yearfield" name="bornyear">
        <input type="submit" value="Submit">
     </form>
-    <form action="/query" method="get">
-       <label for="queryfield">Query:</label>
-       <input type="text" id="queryfield" name="q" placeholder="Enter your query">
-       <input type="submit" value="Submit Query">
-    </form>
  </body>
 </html>

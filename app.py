@@ -23,6 +23,8 @@ def process_query(query):
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif query == "asteroids":
         return "Unknown"
+    else:
+        return "Unknown"
 
 
 @app.route("/query", methods=["GET"])
