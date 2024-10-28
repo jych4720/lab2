@@ -40,6 +40,7 @@ def process_query(query):
         numbers = list(map(int, match_largest.group(1).split(',')))
         largest_number = max(numbers)
         return str(largest_number)
+    return "Unknown"
 
 
 @app.route("/query", methods=["GET"])
