@@ -33,6 +33,13 @@ def process_query(query):
         num2 = int(match.group(2))
         result = num1 + num2
         return str(result)
+    match_largest = re.match(
+        r"Which of the following numbers is the largest: ([\d, ]+)\?", query
+    )
+    if match_largest:
+        numbers = list(map(int, match_largest.group(1).split(',')))
+        largest_number = max(numbers)
+        return str(largest_number)
 
 
 @app.route("/query", methods=["GET"])
