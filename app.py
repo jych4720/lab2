@@ -53,6 +53,13 @@ def process_query(query):
         num2 = int(match_subtraction.group(2))
         result = num1 - num2
         return str(result)
+    match_exponentiation = re.match(
+        r"What is (\d+) to the power of (\d+)\?", query)
+    if match_exponentiation:
+        base = int(match_exponentiation.group(1))
+        exponent = int(match_exponentiation.group(2))
+        result = base ** exponent  # Calculate power
+        return str(result)
     return "Unknown"
 
 
