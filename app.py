@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import re
 
 
 app = Flask(__name__)
@@ -25,6 +26,13 @@ def process_query(query):
         return "Unknown"
     elif query == "What is your name?":
         return "jc4720"
+    match = re.match(r"What is (\d+) plus (\d+)\?", query)
+    if match:
+        # Extract the numbers and calculate the sum
+        num1 = int(match.group(1))
+        num2 = int(match.group(2))
+        result = num1 + num2
+        return str(result)
 
 
 @app.route("/query", methods=["GET"])
