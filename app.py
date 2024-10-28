@@ -47,6 +47,12 @@ def process_query(query):
         num2 = int(match_multiplication.group(2))
         result = num1 * num2
         return str(result)
+    match_subtraction = re.match(r"What is (\d+) minus (\d+)\?", query)
+    if match_subtraction:
+        num1 = int(match_subtraction.group(1))
+        num2 = int(match_subtraction.group(2))
+        result = num1 - num2
+        return str(result)
     return "Unknown"
 
 
