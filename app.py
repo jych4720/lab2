@@ -40,6 +40,13 @@ def process_query(query):
         numbers = list(map(int, match_largest.group(1).split(',')))
         largest_number = max(numbers)
         return str(largest_number)
+    match_multiplication = re.match(
+        r"What is (\d+) multiplied by (\d+)\?", query)
+    if match_multiplication:
+        num1 = int(match_multiplication.group(1))
+        num2 = int(match_multiplication.group(2))
+        result = num1 * num2
+        return str(result)
     return "Unknown"
 
 
