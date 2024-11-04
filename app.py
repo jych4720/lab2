@@ -80,4 +80,6 @@ def submit_github():
     repos = []
     if response.status_code == 200:
         repos = response.json()
-    return render_template("hello2.html", username=input_username, repos=repos)
+        for repo in repos:
+            print(repo["full_name"])
+    return f"<h1>Hello {input_username}!</h1>"
