@@ -83,9 +83,14 @@ def submit_github():
     repos = []
     if response.status_code == 200:
         repos = response.json()
-        # Format the updated_at date to a more readable format
         for repo in repos:
             repo['updated_at'] = datetime.strptime(
                 repo['updated_at'], "%Y-%m-%dT%H:%M:%SZ"
             ).strftime("%B %d, %Y at %I:%M %p")
-    return render_template("hello2.html", username=input_username, repos=repos)
+    followers_url = f"https://api.github.com/users/{input_username}/followers"
+    followers_response = requests.get(followers_url)
+    followers = []
+    if followers_response.status_code == 200:
+        followers = followers_response.json()
+    return render_template("hello2.html", username=input_username,
+                           repos=repos, followers=followers)

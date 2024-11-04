@@ -20,4 +20,14 @@
             </li>
         {% endfor %}
     </ul>
+    <h2>Your Followers:</h2>
+    <ul>
+        {% if followers %}
+            {% for follower in followers %}
+                <li>{{ follower['login'] }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No followers found.</li>
+        {% endif %}
+    </ul>
 </body>
