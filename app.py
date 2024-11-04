@@ -76,10 +76,10 @@ def query():
 @app.route("/submit_github", methods=["POST"])
 def submit_github():
     input_username = request.form.get("username")
-    repos_url = (
+    url = (
         f"https://api.github.com/users/{input_username}/repos"
     )
-    response = requests.get(repos_url)
+    response = requests.get(url)
     repos = []
     if response.status_code == 200:
         repos = response.json()
@@ -99,19 +99,6 @@ def submit_github():
                         ).strftime("%B %d, %Y at %I:%M %p"),
                         'message': latest_commit['commit']['message']
                     }
-                else:
-                    repo['latest_commit'] = None
             else:
                 repo['latest_commit'] = None
-    followers_response = requests.get(
-        f"https://api.github.com/users/{input_username}/followers"
-    )
-    followers = []
-    if followers_response.status_code == 200:
-        followers = followers_response.json()
-    return render_template(
-        "hello2.html",
-        username=input_username,
-        repos=repos,
-        followers=followers
-    )
+    return render_template("hello2.html", username=input_username, repos=repos)
