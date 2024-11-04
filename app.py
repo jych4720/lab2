@@ -83,22 +83,9 @@ def submit_github():
     repos = []
     if response.status_code == 200:
         repos = response.json()
+        # Format the updated_at date to a more readable format
         for repo in repos:
-            commits_url = repo['commits_url'].replace('{/sha}', '')
-            commits_response = requests.get(commits_url)
-            if commits_response.status_code == 200:
-                commits = commits_response.json()
-                if commits:
-                    latest_commit = commits[0]
-                    repo['latest_commit'] = {
-                        'sha': latest_commit['sha'],
-                        'author': latest_commit['commit']['author']['name'],
-                        'date': datetime.strptime(
-                            latest_commit['commit']['author']['date'],
-                            "%Y-%m-%dT%H:%M:%SZ"
-                        ).strftime("%B %d, %Y at %I:%M %p"),
-                        'message': latest_commit['commit']['message']
-                    }
-            else:
-                repo['latest_commit'] = None
+            repo['updated_at'] = datetime.strptime(
+                repo['updated_at'], "%Y-%m-%dT%H:%M:%SZ"
+            ).strftime("%B %d, %Y at %I:%M %p")
     return render_template("hello2.html", username=input_username, repos=repos)
