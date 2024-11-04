@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import re
-
-
+import requests
 app = Flask(__name__)
 
 
@@ -76,4 +75,10 @@ def query():
 @app.route("/submit_github", methods=["POST"])
 def submit_github():
     input_username = request.form.get("username")
-    return render_template("hello2.html", username=input_username)
+    response = requests.get(
+              f"https://api.github.com/users/{input_username}/repos")
+    if response.status_code == 200:
+        repos = response.json()
+        for repo in repos:
+            print(repo["full_name"])
+    return render_template("hello2.html", username=input_username, repos=repos)
