@@ -1,3 +1,23 @@
- <body>
-   <h1>Hello {{ username }}!</h1>
- </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub User Info</title>
+</head>
+<body>
+    <h1>Hello {{ username }}!</h1>
+    <h2>Your Repositories:</h2>
+    <ul>
+        {% if repos %}
+            {% for repo in repos %}
+                <li>
+                    {{ repo['full_name'] }} - Last updated: {{ repo['updated_at'] }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>No repositories found.</li>
+        {% endif %}
+    </ul>
+</body>
+</html>

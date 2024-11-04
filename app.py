@@ -82,3 +82,4 @@ def submit_github():
         repos = response.json()
         for repo in repos:
             print(repo["full_name"])
+    return render_template("hello2.html", username=input_username, repos=repos)
