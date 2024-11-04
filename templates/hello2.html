@@ -1,13 +1,15 @@
 <body>
-  <h1>Hello {{ username }}!</h1>
-  <h2>Your Repositories:</h2>
-  <ul>
-    {% if repos %}
-      {% for repo in repos %}
-        <li>{{ repo['full_name'] }}</li>
-      {% endfor %}
-    {% else %}
-      <li>No repositories found.</li>
-    {% endif %}
-  </ul>
+    <h1>Hello {{ username }}!</h1>
+    <h2>Your Repositories:</h2>
+    <ul>
+        {% if repos %}
+            {% for repo in repos %}
+                <li>
+                    {{ repo['full_name'] }} - Last updated: {{ repo['updated_at'] }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>No repositories found.</li>
+        {% endif %}
+    </ul>
 </body>

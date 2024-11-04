@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import re
 import requests
+from datetime import datetime
 app = Flask(__name__)
 
 
@@ -81,4 +82,8 @@ def submit_github():
     repos = []
     if response.status_code == 200:
         repos = response.json()
+        for repo in repos:
+            repo['updated_at'] = datetime.strptime(
+                repo['updated_at'], "%Y-%m-%dT%H:%M:%SZ"
+            ).strftime("%B %d, %Y at %I:%M %p")
     return render_template("hello2.html", username=input_username, repos=repos)
