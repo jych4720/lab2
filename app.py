@@ -101,4 +101,10 @@ def submit_github():
                     }
             else:
                 repo['latest_commit'] = None
-    return render_template("hello2.html", username=input_username, repos=repos)
+    response_followers = requests.get(
+        f"https://api.github.com/users/{input_username}/followers")
+    followers = []
+    if response_followers.status_code == 200:
+        followers = response_followers.json()
+    return render_template(
+      "hello2.html", username=input_username, repos=repos, followers=followers)

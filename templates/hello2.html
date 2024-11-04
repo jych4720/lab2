@@ -4,20 +4,30 @@
     <ul>
         {% for repo in repos %}
             <li>
-                {{ repo['full_name'] }} - Last updated: {{ repo['updated_at'] }}
+                <strong>{{ repo['full_name'] }}</strong> - Last updated: {{ repo['updated_at'] }}
                 <ul>
                     {% if repo.latest_commit %}
                         <li>
-                            Latest Commit: <strong>{{ repo.latest_commit.sha }}</strong><br>
+                            Latest Commit: <strong>{{ repo.latest_commit.message }}</strong><br>
                             Author: {{ repo.latest_commit.author }}<br>
-                            Date: {{ repo.latest_commit.date }}<br>
-                            Message: {{ repo.latest_commit.message }}
+                            Date: {{ repo.latest_commit.date.strftime('%Y-%m-%d %H:%M:%S') }}<br>
                         </li>
                     {% else %}
                         <li>No commits found.</li>
                     {% endif %}
                 </ul>
             </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Your Followers:</h2>
+    <ul>
+        {% for follower in followers %}
+            <li>
+                <a href="{{ follower.html_url }}">{{ follower.login }}</a>
+            </li>
+        {% else %}
+            <li>No followers found.</li>
         {% endfor %}
     </ul>
 </body>
