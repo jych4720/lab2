@@ -71,3 +71,9 @@ def query():
     else:
         result = "Query parameter 'q' is missing."
     return result
+
+
+@app.route("/submit", methods=["POST"])
+def submit():
+    input_username = request.form.get("username")
+    return render_template("hello2.html", username=input_username)

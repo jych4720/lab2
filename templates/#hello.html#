@@ -1,0 +1,7 @@
+ <body>
+  <h1>Hello {{ name }}!</h1>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbpdV5eKcBMzjs7ltDev4YxvWvnNxcFk7wUg&s" alt="A flower image from Pixabay">  
+  <p>Name: {{ name }}</p>
+  <p>Age: {{ age }}</p>
+  <p>Bornyear: {{ bornyear }}</p>
+  </body>
