@@ -10,13 +10,15 @@
                         <li>
                             Latest Commit: <strong>{{ repo.latest_commit.message }}</strong><br>
                             Author: {{ repo.latest_commit.author }}<br>
-                            Date: {{ repo.latest_commit.date.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+                            Date: {{ repo.latest_commit.date }}<br>
                         </li>
                     {% else %}
                         <li>No commits found.</li>
                     {% endif %}
                 </ul>
             </li>
+        {% else %}
+            <li>No repositories found.</li>
         {% endfor %}
     </ul>
 

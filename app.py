@@ -76,10 +76,10 @@ def query():
 @app.route("/submit_github", methods=["POST"])
 def submit_github():
     input_username = request.form.get("username")
-    url = (
+    repos_url = (
         f"https://api.github.com/users/{input_username}/repos"
     )
-    response = requests.get(url)
+    response = requests.get(repos_url)
     repos = []
     if response.status_code == 200:
         repos = response.json()
@@ -94,17 +94,24 @@ def submit_github():
                         'sha': latest_commit['sha'],
                         'author': latest_commit['commit']['author']['name'],
                         'date': datetime.strptime(
-                           latest_commit['commit']['author']['date'],
-                           "%Y-%m-%dT%H:%M:%SZ"
+                            latest_commit['commit']['author']['date'],
+                            "%Y-%m-%dT%H:%M:%SZ"
                         ).strftime("%B %d, %Y at %I:%M %p"),
                         'message': latest_commit['commit']['message']
                     }
+                else:
+                    repo['latest_commit'] = None
             else:
                 repo['latest_commit'] = None
-    response_followers = requests.get(
-        f"https://api.github.com/users/{input_username}/followers")
+    followers_response = requests.get(
+        f"https://api.github.com/users/{input_username}/followers"
+    )
     followers = []
-    if response_followers.status_code == 200:
-        followers = response_followers.json()
+    if followers_response.status_code == 200:
+        followers = followers_response.json()
     return render_template(
-      "hello2.html", username=input_username, repos=repos, followers=followers)
+        "hello2.html",
+        username=input_username,
+        repos=repos,
+        followers=followers
+    )
