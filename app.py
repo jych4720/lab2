@@ -74,6 +74,6 @@ def query():
 
 
 @app.route("/submit", methods=["POST"])
-def submit():
+def submit_github():
     input_username = request.form.get("username")
     return render_template("hello2.html", username=input_username)
