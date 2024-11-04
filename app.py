@@ -76,14 +76,29 @@ def query():
 @app.route("/submit_github", methods=["POST"])
 def submit_github():
     input_username = request.form.get("username")
-    response = requests.get(
+    url = (
         f"https://api.github.com/users/{input_username}/repos"
     )
+    response = requests.get(url)
     repos = []
     if response.status_code == 200:
         repos = response.json()
         for repo in repos:
-            repo['updated_at'] = datetime.strptime(
-                repo['updated_at'], "%Y-%m-%dT%H:%M:%SZ"
-            ).strftime("%B %d, %Y at %I:%M %p")
+            commits_url = repo['commits_url'].replace('{/sha}', '')
+            commits_response = requests.get(commits_url)
+            if commits_response.status_code == 200:
+                commits = commits_response.json()
+                if commits:
+                    latest_commit = commits[0]
+                    repo['latest_commit'] = {
+                        'sha': latest_commit['sha'],
+                        'author': latest_commit['commit']['author']['name'],
+                        'date': datetime.strptime(
+                           latest_commit['commit']['author']['date'],
+                           "%Y-%m-%dT%H:%M:%SZ"
+                        ).strftime("%B %d, %Y at %I:%M %p"),
+                        'message': latest_commit['commit']['message']
+                    }
+            else:
+                repo['latest_commit'] = None
     return render_template("hello2.html", username=input_username, repos=repos)
