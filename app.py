@@ -73,7 +73,7 @@ def query():
     return result
 
 
-@app.route("/submit", methods=["POST"])
+@app.route("/submit_github", methods=["POST"])
 def submit_github():
     input_username = request.form.get("username")
     return render_template("hello2.html", username=input_username)
